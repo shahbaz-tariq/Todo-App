@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
-    id("com.google.devtools.ksp")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp") version ("1.9.0-1.0.13")
 }
 
 android {
     namespace = "com.example.todolist"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.todolist"
@@ -30,9 +31,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    /*kotlinOptions {
+    kotlinOptions {
         jvmTarget = "1.8"
-    }*/
+    }
 }
 
 dependencies {
@@ -50,4 +51,7 @@ dependencies {
     //Room
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
+
+    //Extensions & Coroutines
+    implementation("androidx.room:room-ktx:$room_version")
 }
