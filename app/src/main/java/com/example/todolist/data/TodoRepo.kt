@@ -17,7 +17,7 @@ class TodoRepo(private val todoDao: TodoDao) {
         todoDao.delete(todo)
     }
 
-    suspend fun getAllTodos(): Flow<List<Todo>> {
+    fun getAllTodos(): Flow<List<Todo>> {
         return todoDao.getAllTodos()
     }
 

@@ -8,6 +8,10 @@ android {
     namespace = "com.example.todolist"
     compileSdk = 34
 
+    buildFeatures{
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.todolist"
         minSdk = 24
@@ -39,6 +43,7 @@ android {
 dependencies {
 
     val room_version = "2.6.1"
+    val lifecycle_version = "2.6.2"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,7 +56,14 @@ dependencies {
     //Room
     implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:$room_version")
-
     //Extensions & Coroutines
     implementation("androidx.room:room-ktx:$room_version")
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+
+    implementation ("androidx.activity:activity-ktx:1.8.2")
+
 }
