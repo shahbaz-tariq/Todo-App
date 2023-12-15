@@ -20,6 +20,10 @@ class TodoAdapter : ListAdapter<Todo, TodoAdapter.TodoViewHolder>(TodoComparator
         holder.bind(current)
     }
 
+    fun getTodo(position: Int): Todo {
+        return getItem(position)
+    }
+
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.tvTitle)
         private val desc: TextView = itemView.findViewById(R.id.tvDesc)

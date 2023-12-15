@@ -19,19 +19,47 @@ class AddTodo : AppCompatActivity() {
         val desc = binding.etDesc
         val btn = binding.add*/
 
-        binding.add.setOnClickListener {
-            val replyIntent = Intent()
-            if (TextUtils.isEmpty(binding.etTitle.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                val title = binding.etTitle.text.toString()
-                val desc = binding.etDesc.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY, title)
-                replyIntent.putExtra(EXTRA_REPLY2, desc)
-                setResult(Activity.RESULT_OK, replyIntent)
+        when (intent.getStringExtra("type")) {
+            "update" -> {
+                title = "Update Todo"
+                binding.etTitle.setText(intent.getStringExtra("name"))
+                binding.etDesc.setText(intent.getStringExtra("desc"))
+                val id: Int = intent.getIntExtra("id", 0)
+                binding.add.text = "Update"
+                binding.add.setOnClickListener {
+                    val replyIntent = Intent()
+                    if (TextUtils.isEmpty(binding.etTitle.text)) {
+                        setResult(0, replyIntent)
+                    } else {
+                        val title = binding.etTitle.text.toString()
+                        val desc = binding.etDesc.text.toString()
+                        replyIntent.putExtra(EXTRA_REPLY, title)
+                        replyIntent.putExtra(EXTRA_REPLY2, desc)
+                        setResult(2, replyIntent)
+                        intent.putExtra("id", id)
+                    }
+                    finish()
+                }
             }
-            finish()
+
+            else -> {
+                title = "Add Todo"
+                binding.add.setOnClickListener {
+                    val replyIntent = Intent()
+                    if (TextUtils.isEmpty(binding.etTitle.text)) {
+                        setResult(0, replyIntent)
+                    } else {
+                        val title = binding.etTitle.text.toString()
+                        val desc = binding.etDesc.text.toString()
+                        replyIntent.putExtra(EXTRA_REPLY, title)
+                        replyIntent.putExtra(EXTRA_REPLY2, desc)
+                        setResult(Activity.RESULT_OK, replyIntent)
+                    }
+                    finish()
+                }
+            }
         }
+
     }
 
     companion object {
