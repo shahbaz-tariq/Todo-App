@@ -9,4 +9,5 @@ data class Todo(
     @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "description") val desc: String,
+    var completed: Boolean = false
 )

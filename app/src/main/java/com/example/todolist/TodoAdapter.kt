@@ -1,8 +1,10 @@
 package com.example.todolist
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -18,6 +20,12 @@ class TodoAdapter : ListAdapter<Todo, TodoAdapter.TodoViewHolder>(TodoComparator
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
+
+        holder.cbCompleted.setOnCheckedChangeListener { _, isChecked ->
+            current.completed = isChecked
+            holder.bind(current)
+        }
+
     }
 
     fun getTodo(position: Int): Todo {
@@ -27,10 +35,21 @@ class TodoAdapter : ListAdapter<Todo, TodoAdapter.TodoViewHolder>(TodoComparator
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.tvTitle)
         private val desc: TextView = itemView.findViewById(R.id.tvDesc)
+        val cbCompleted: CheckBox = itemView.findViewById(R.id.cbCompleted)
 
         fun bind(todo: Todo) {
             title.text = todo.name
             desc.text = todo.desc
+
+            // Apply strikethrough effect if the item is completed
+            if (todo.completed) {
+                title.paintFlags = title.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                desc.paintFlags = title.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                title.paintFlags = title.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                desc.paintFlags = title.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
+            cbCompleted.isChecked = todo.completed
         }
 
         companion object {

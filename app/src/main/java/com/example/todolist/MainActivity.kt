@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(swipeCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
+        Toast.makeText(applicationContext, "Swipe Left for Delete\nSwipe Right for Edit", Toast.LENGTH_SHORT).show()
+
     }
 
     private val todoViewModel: TodoViewModel by viewModels {
