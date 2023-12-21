@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
                         todoViewModel.delete(adapter.getTodo(viewHolder.adapterPosition))
+                        Toast.makeText(applicationContext, "Todo Deleted", Toast.LENGTH_SHORT).show()
                     }
 
                     ItemTouchHelper.RIGHT -> {

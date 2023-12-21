@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">TodoList</string>
-    <string name="empty_not_saved">Word not saved because it is empty.</string>
+    <string name="empty_not_saved">Todo not saved because its empty.</string>
 </resources>
